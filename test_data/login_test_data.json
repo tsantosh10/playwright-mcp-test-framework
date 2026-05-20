@@ -1,0 +1,14 @@
+{
+  "valid_user": {
+    "username": "Sai",
+    "password": "Imedx@123"
+  },
+  "invalid_user": {
+    "username": "wrong_user",
+    "password": "wrong_password"
+  },
+  "empty_credentials": {
+    "username": "",
+    "password": ""
+  }
+}
