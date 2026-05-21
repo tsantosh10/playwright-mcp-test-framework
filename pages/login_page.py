@@ -36,6 +36,19 @@ class LoginPage(BasePage):
         """Verify error message appears on failed login"""
         self.assert_visible(self.ERROR_MESSAGE)
 
+    def verify_login_failed(self):
+        """Verify login attempt failed and login form remains visible."""
+        self.page.wait_for_timeout(1000)
+        error_locator = self.page.locator(self.ERROR_MESSAGE).first
+        if self.page.locator(self.ERROR_MESSAGE).count() > 0:
+            assert error_locator.is_visible(), \
+                "Expected an error message to be visible after failed login"
+        else:
+            assert self.page.locator(self.USERNAME_INPUT).count() > 0, \
+                "Expected login form to remain visible after failed login"
+            assert self.page.locator(self.DASHBOARD_HEADER).count() == 0, \
+                "Unexpected dashboard content present after failed login"
+
     def wait_for_page_load(self, timeout: int = 5000):
         """Wait for page to fully load"""
         self.page.wait_for_load_state('networkidle', timeout=timeout)
